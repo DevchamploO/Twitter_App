@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div id="header">
+    <div id="row_top">
+        <div id="search_wrapper">
+            <div id="search_form">
+                <div id="logo_wrapper">
+                    <h1>
+                        <a href="#">
+                            <img src="http://vignette3.wikia.nocookie.net/logopedia/images/5/51/Twitter_logo.svg/revision/latest?cb=20100726111457" width="120" height="44"/>
+                        </a>
+                    </h1>
+                </div>
+                <!-- text box -->
+                <div id="search_box_wrapper">
+                    <form method="post" th:object="${tweetObj}" id="search_box">
+                        <input type="text" name="tweet" id="search_input" placeholder="What's happening?"/>
+                        <button type="submit" name="action" value="compose" id="search">C</button>
+                        <button type="submit" name="action" value="save" id="compose">S</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--user profile stuff-->
+        <div id="user_wrapper">
+            <div id="user_icons_wrapper">
+                <div class="user_icon">
+                    <div class="icon"></div>
+                </div>
+                <div class="user_icon">
+                    <div class="icon"></div>
+                </div>
+                <div class="user_icon">
+                    <img class="icon round" th:src="${profileImg}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--bottom half of header-->
+    <div id="row_bottom">
+        <div id="menu_wrapper">
+            <ul id="menu">
+                <li>
+                    <a href="#">All</a>
+                </li>
+                <li>
+                    <a href="#">News</a>
+                </li>
+                <li>
+                    <a href="#">Videos</a>
+                </li>
+                <li>
+                    <a href="#">Images</a>
+                </li>
+                <li>
+                    <a href="#">Shopping</a>
+                </li>
+                <li>
+                    <a href="#">More</a>
+                </li>
+            </ul>
+            <ul id="menu_right">
+                <li>
+                    <a href="#">Settings</a>
+                </li>
+                <li>
+                    <a href="#">Tools</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div id="content_wrapper">
+        <div class="userResult" th:each="userResult : ${userResults}">
+            <img th:src="${userResult.profileImageUrl}" width="100" height="100"/>
+            <h3><a th:href="${userResult.profileUrl}" th:text="${userResult.name}"></a></h3>
+
+            <p th:text="'@' + ${userResult.screenName}"></p>
+            <span th:text="${userResult.description}"></span>
+        </div>
+    </div>
+
+    </div>
+
+</body>
+</html>

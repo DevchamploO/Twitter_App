@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Twitter</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="cd-main-content">
+    <div id="header">
+        <div id="row_top">
+            <div id="search_wrapper">
+                <div id="search_form">
+                    <div id="logo_wrapper">
+                        <h1>
+                            <a href="#">
+                                <img src="http://vignette3.wikia.nocookie.net/logopedia/images/5/51/Twitter_logo.svg/revision/latest?cb=20100726111457" width="120" height="44"/>
+                            </a>
+                        </h1>
+                    </div>
+                    <!-- text box -->
+                    <div id="search_box_wrapper">
+                        <form method="post" th:object="${tweetObj}" id="search_box">
+                            <input type="text" name="tweet" id="search_input" placeholder="What's happening?"/>
+                            <button type="submit" name="action" value="search" id="search">S</button>
+                            <button type="submit" name="action" value="compose" id="compose">C</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--user profile stuff-->
+            <div id="user_wrapper">
+                <div id="user_icons_wrapper">
+                    <div class="user_icon">
+                        <div class="icon"></div>
+                    </div>
+                    <div class="user_icon">
+                        <div class="icon"></div>
+                    </div>
+                    <div class="user_icon">
+                        <img class="icon round" th:src="${profileImg}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--bottom half of header-->
+        <div id="row_bottom">
+            <div id="menu_wrapper">
+                <ul id="menu">
+                    <li>
+                        <a href="/tweets">Tweets</a>
+                    </li>
+                    <li>
+                        <a href="/following">Following</a>
+                    </li>
+                    <li>
+                        <a href="/followers">Followers</a>
+                    </li>
+                    <li>
+                        <a href="/likes">Likes</a>
+                    </li>
+                    <li>
+                        <a href="/direct_messages">Messages</a>
+                    </li>
+                    <li>
+                        <a href="#">More</a>
+                    </li>
+                </ul>
+                <ul id="menu_right">
+                    <li>
+                        <a href="#">Settings</a>
+                    </li>
+                    <li>
+                        <a href="#">Tools</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="content_wrapper">
+        <div class="result" th:each="result : ${results}">
+            <h3><a id="userName" th:href="${result.screenName}" th:text="${result.name}"></a></h3>
+
+            <p th:text="'@' + ${result.screenName}"></p>
+            <span th:text="${result.description}"></span>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script th:src="@{/js/jquery.modal.min.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/script.js}" type="text/javascript" charset="utf-8">></script>
+</body>
+</html>

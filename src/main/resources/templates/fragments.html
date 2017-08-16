@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title>Twitter</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/css/jquery.modal.css}" type="text/css" media="screen" />
+</head>
+<body>
+<div id="header" th:fragment="header">
+    <div id="left-side">
+        <!-- Logo-->
+        <div id="logo-search">
+            <div id="logo-wrapper">
+                <h1>
+                    <a href="#">
+                        <ul>
+                            <li>G</li>
+                            <li>o</li>
+                            <li>o</li>
+                            <li>g</li>
+                            <li>l</li>
+                            <li>e</li>
+                        </ul>
+                    </a>
+                </h1>
+            </div>
+            <!-- text box -->
+            <div id="mobile-nav-wrapper">
+                <div id="search-box-wrapper">
+                    <form id="search-box" th:object="${tweetObj}" method="post">
+                        <input type="text" name="tweet" id="search-input" placeholder="What's Happening?" maxlength="140"/>
+                        <button type="submit" name="action" value="search-btn" id="search"></button>
+                        <button type="submit" name="action" value="compose-btn" id="compose"></button>
+                    </form>
+                </div>
+                <div id="bottom-row">
+                    <div id="menu_wrapper">
+                        <ul id="menu">
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="/tweets">Tweets</a>
+                            </li>
+                            <li>
+                                <a href="/following">Following</a>
+                            </li>
+                            <li>
+                                <a href="/followers">Followers</a>
+                            </li>
+                            <li>
+                                <a href="/likes">Likes</a>
+                            </li>
+                            <li>
+                                <a href="/messages">Messages</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        NAVIGATION WOULD GO HERE
+        THEN TOP ROW CLOSING TAG GOES HERE
+      -->
+    </div>
+    <div id="right-side">
+        <!-- user profile stuff -->
+        <div id="user-wrapper">
+            <div id="user-icons-wrapper">
+                <div class="user-icon">
+                    <div class="icon">
+                    </div>
+                </div>
+                <div class="user-icon">
+                    <div class="icon">
+                    </div>
+                </div>
+                <div class="user-icon">
+                    <div class="icon round" th:src="${profileImg}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+END OF HEADER
+BEGINNING OF TWITTER CONTENT
+(TIMELINES ETC.)
+-->
+
+<div id="content-wrapper" th:fragment="content">
+    <div class="result" th:each="result : ${results}">
+        <div class="result-header">
+            <h3><a id="userName" th:href="${result.fromUser}" th:text="${result.user.name}"></a></h3>
+            <p th:text="'@' + ${result.fromUser}"></p>
+        </div>
+        <div class="result-body">
+            <span th:text="${result.text}"></span>
+            <div class="actions" th:switch="${result.fromUser}">
+                <a href="JavaScript:void(0);" th:onclick="'set_like(\'' + ${result.idStr} + '\');'">Like</a> ·
+                <a href="#status_form" rel="modal:open" th:onclick="'set_rUser(\'' + ${result.idStr} +'\',\''+ ${result.fromUser} + '\');'">Reply</a> ·
+                <a href="JavaScript:void(0);" th:onclick="'doRetweet(\'' + ${result.idStr} +'\');'">Retweet</a> ·
+                <a href="JavaScript:void(0);" th:onclick="'doDelete(\'' + ${result.idStr} + '\');'" th:case="${profileName}">Delete</a>
+                <a href="#message_form" rel="modal:open" th:case="*">Direct message</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content_wrapper" th:fragment="contentNoMenu">
+    <div class="result" th:each="result : ${results}">
+        <h3><a id="userName" th:href="${result.screenName}" th:text="${result.name}"></a></h3>
+
+        <p th:text="'@' + ${result.screenName}"></p>
+        <span th:text="${result.description}"></span>
+    </div>
+</div>
+
+<!--for direct messages-->
+<div id="content_wrapper" th:fragment="contentForMsg">
+    <div class="result" th:each="result : ${results}">
+        <h3><a id="userName" th:href="${result.sender.screenName}" th:text="${result.sender.name}"></a></h3>
+
+        <p th:text="'@' + ${result.sender.screenName}"></p>
+        <span th:text="${result.text}"></span>
+    </div>
+</div>
+
+<!--Sidebar-->
+<div id="sidebar" th:fragment="aside" th:with="user=${user}">
+    <div id="sidebar-Header">
+        <div id="sidebar-user-wrapper">
+            <div id="name-wrapper">
+                <div id="user-name" th:text="${user.name}"></div>
+                <div id="screen-name" th:text="'@' + ${user.screenName}"></div>
+            </div>
+            <div id="image-wrapper">
+                <img th:src="${user.profileImageUrl}" id="profile-img" width="121"/>
+            </div>
+        </div>
+    </div>
+
+    <div id="stats">
+        <a href="#" id="stat_one">
+            <span class="stat-num" th:text="${user.statusesCount}"></span>
+            <span class="stat-title">Tweets</span>
+        </a>
+        <a href="#">
+            <span class="stat-num" th:text="${user.friendsCount}"></span>
+            <span class="stat-title">Following</span>
+        </a>
+        <a href="#" id="stat-last">
+            <span class="stat-num" th:text="${user.followersCount}"></span>
+            <span class="stat-title">Followers</span>
+        </a>
+    </div>
+
+    <div id="about">
+        <p th:text="${user.description}"></p>
+        <b>Location:</b><p th:text="${user.location}"></p><br/>
+        <b>Link:</b><p th:text="${user.url}"></p><br/>
+        <b>Created:</b><p th:text="${user.createdDate}"></p>
+    </div>
+
+</div>
+</body>
+</html>

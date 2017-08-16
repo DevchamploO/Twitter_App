@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<body>
+    <div class="cd-main-content">
+
+        <div th:replace="fragments :: header"></div>
+
+        <div id="content">
+
+            <div th:replace="fragments :: contentNoMenu"></div>
+
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script th:src="@{/js/jquery.modal.min.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/js/script.js}" type="text/javascript" charset="utf-8">></script>
+</body>
+</html>

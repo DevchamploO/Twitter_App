@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<body>
+    <div class="cd-main-content">
+
+        <div th:replace="fragments :: header"></div>
+
+        <div id="content">
+            <div th:replace="fragments :: aside"></div>
+            <div th:replace="fragments :: content"></div>
+
+
+
+        </div>
+    </div>
+
+<!-- modal popup forms -->
+
+<form method="post" id="status_form" class="modal" style="display:none;">
+    <p id="name"></p>
+    <textarea type="text" name="message" id="textbox" maxlength="140"></textarea>
+    <input type="submit" value="send" id="twitter_action"/>
+</form>
+
+<form method="post" id="message_form" class="modal" style="display:none;">
+    <input type="text" name="tweetId" id="tweetId"/>
+    <textarea type="text" name="message" id="message" maxlength="140"></textarea>
+    <input type="submit" value="send" id="DM_action"/>
+</form>
+
+
+<!--JavaScript libraries-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script th:src="@{/js/jquery.modal.min.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/script.js}" type="text/javascript" charset="utf-8">></script>
+</body>
+</html>
