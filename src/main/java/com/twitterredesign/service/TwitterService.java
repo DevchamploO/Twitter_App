@@ -15,10 +15,10 @@ import java.util.List;
  */
 @Service
 public class TwitterService {
-    String consumerKey = "JVO3OoIB5zsDnNKnkLzh8lhk2"; // The application's consumer key
-    String consumerSecret = "IEFIy7Nr1hPG6PESnRWopBiOGQGKh37qAyL8uAcrzJMjXzdmIq"; // The application's consumer secret
-    String accessToken = "37338499-chIFI8QdNoEpWva2YvucvmHFMetNUlPvVdjSmgpe9"; // The access token granted after OAuth authorization
-    String accessTokenSecret = "4ItZRy76KaAHgHRodmWIqSS11OiGWtgvCEdA6YFkKB8rS"; // The access token secret granted after OAuth
+    String consumerKey = " ***consumer key goes here*** "; // The application's consumer key
+    String consumerSecret = " ***consumer secret goes here*** "; // The application's consumer secret
+    String accessToken = " *** access token goes here*** "; // The access token granted after OAuth authorization
+    String accessTokenSecret = " ***access token secret goes here*** "; // The access token secret granted after OAuth
 
     Twitter twitter = new TwitterTemplate(consumerKey, consumerSecret, accessToken, accessTokenSecret);
 
