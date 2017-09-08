@@ -13,4 +13,4 @@ String accessToken = " *** access token goes here*** "; // The access token gran
 String accessTokenSecret = " ***access token secret goes here*** "; // The access token secret granted after OAuth
 ```
 
-you can view it on heroku [here](https://twiggle-app.herokuapp.com/).
+you can view it on heroku [here](https://twigle-app.herokuapp.com/).
