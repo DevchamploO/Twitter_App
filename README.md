@@ -1,10 +1,10 @@
-# Twiggle - Twitter Applicatiion
+# Twigle - Twitter Applicatiion
 
 ---
 
 This app displays a users timeline, messages and other information. You can search and view other profiles with this app. The information is designed to look like a google results page.
 
-You will need to have a developer account with Twitter and replace the following below with respective counterpart in TwitterService.java after setting up your application with twitter.
+You will need to have a developer account with Twitter and replace the following below with respective counterpart in TwitterService.java after setting up your application with Twitter.
 
 ```java
 String consumerKey = " ***consumer key goes here*** "; // The application's consumer key
